@@ -3,27 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group>
 
         <item
             android:id="@+id/nav_forecast"
             android:icon="@drawable/ic_forecast"
-            android:title="Forecast"></item>
+            android:title="Pain Chance"
+            android:checkable="true"></item>
 
         <item
             android:id="@+id/nav_meaning"
             android:icon="@drawable/ic_meaning"
-            android:title="Index Meaning"></item>
+            android:title="How it works"></item>
 
         <item
             android:id="@+id/nav_tips"
             android:icon="@drawable/ic_tips"
             android:title="Pain Tips"></item>
 
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_about"
-            android:title="About"></item>
     </group>
 
     <item android:title="Preferences">

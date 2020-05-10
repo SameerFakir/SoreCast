@@ -49,7 +49,7 @@ public class CityFragment extends Fragment {
     private List<String> lstCities;
     private MaterialSearchBar searchBar;
     ImageView img_weather;
-    TextView txt_city_name, txt_humidity, txt_sunrise, txt_sunset, txt_temperature, txt_pressure, txt_description, txt_date_time, txt_wind, txt_geo_coord,txt_pain_index;
+    TextView txt_city_name, txt_humidity, txt_temperature, txt_pressure, txt_description, txt_date_time, txt_wind, txt_pain_index, txt_pain_desc;
     LinearLayout weather_panel;
     ProgressBar loading;
 
@@ -82,15 +82,13 @@ public class CityFragment extends Fragment {
         img_weather = (ImageView)itemView.findViewById(R.id.img_weather);
         txt_city_name = (TextView)itemView.findViewById(R.id.txt_city_name);
         txt_humidity = (TextView)itemView.findViewById(R.id.txt_humidity);
-        txt_sunrise = (TextView)itemView.findViewById(R.id.txt_sunrise);
-        txt_sunset = (TextView)itemView.findViewById(R.id.txt_sunset);
         txt_pressure = (TextView)itemView.findViewById(R.id.txt_pressure);
         txt_temperature = (TextView)itemView.findViewById(R.id.txt_temperature);
         txt_description = (TextView)itemView.findViewById(R.id.txt_description);
         txt_date_time = (TextView)itemView.findViewById(R.id.txt_date_time);
         txt_wind = (TextView)itemView.findViewById(R.id.txt_wind);
-        txt_geo_coord = (TextView)itemView.findViewById(R.id.txt_geo_coord);
         txt_pain_index = (TextView)itemView.findViewById(R.id.txt_pain_index);
+        txt_pain_desc = (TextView)itemView.findViewById(R.id.txt_pain_desc);
 
         weather_panel = (LinearLayout)itemView.findViewById(R.id.weather_panel);
 
@@ -206,10 +204,14 @@ public class CityFragment extends Fragment {
                          txt_date_time.setText(Common.convertUnixToDate(weatherResult.getDt()));
                          txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append(" hpa").toString());
                          txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append(" %").toString());
-                         txt_sunrise.setText(Common.convertUnixToHour(weatherResult.getSys().getSunrise()));
-                         txt_sunset.setText(Common.convertUnixToHour(weatherResult.getSys().getSunset()));
-                         txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
-                         txt_pain_index.setText(new StringBuilder("Pain Index: ").append(calculatePain(
+                         //Testing index pain
+                         txt_pain_index.setText(new StringBuilder(calculatePain(
+                                 weatherResult.getMain().getHumidity(),
+                                 weatherResult.getMain().getPressure(),
+                                 weatherResult.getWind().getSpeed()
+                         )).toString());
+                         //Testing index desc
+                         txt_pain_desc.setText(new StringBuilder(calculatePainDesc(
                                  weatherResult.getMain().getHumidity(),
                                  weatherResult.getMain().getPressure(),
                                  weatherResult.getWind().getSpeed()
@@ -239,35 +241,63 @@ public class CityFragment extends Fragment {
      private String calculatePain(int inputHumidity, double inputPressure, double inputWind) {
          double pain, pressureRisk, humidityRisk, windRisk;
          String level = "Error";
-         //tempWeight = -0.0501*(inputTemp) + 4.4575;
-         //humidityWeight = 0.0155*(inputHumidity) + 2.7262;
-         //windWeight = -0.0045*(inputWind) + 3.874;
-         //pain = 0.8*tempWeight + 0.15*humidityWeight + 0.05*windWeight;
 
          humidityRisk = (12/9)*(inputHumidity - 83);
          windRisk = 2*(inputWind - 4);
          pressureRisk = (-4/11)*(inputPressure - 1013);
          pain = 100 + humidityRisk + windRisk + pressureRisk;
 
-         // if age > 35 then * 0.80, else if age >...
-
+         //Include some visuals (numberline) to show where they are on the pain scale
 
          if (pain < 75){
-             level = "Minimal";
+             level = "Tiny";
+             txt_pain_index.setTextColor(getResources().getColor(R.color.tiny));
          }
-         else if (pain > 75 && pain < 90){
-             level = "Minor";
+         else if (pain >= 75 && pain < 90){
+             level = "Small";
+             txt_pain_index.setTextColor(getResources().getColor(R.color.small));
          }
-         else if (pain > 90 && pain < 110){
+         else if (pain >= 90 && pain < 110){
              level = "Average";
+             txt_pain_index.setTextColor(getResources().getColor(R.color.average));
          }
-         else if (pain > 110 && pain < 125){
-             level = "Moderate";
+         else if (pain >= 110 && pain < 125){
+             level = "High";
+             txt_pain_index.setTextColor(getResources().getColor(R.color.high));
          }
-         else if (pain > 125){
-             level = "Intense";
+         else if (pain >= 125){
+             level = "Strong";
+             txt_pain_index.setTextColor(getResources().getColor(R.color.strong));
          }
+
          return level;
+     }
+
+     private String calculatePainDesc(int inputHumidity, double inputPressure, double inputWind) {
+         double pain, pressureRisk, humidityRisk, windRisk;
+         int roundedPain;
+         String desc = "Error";
+
+         humidityRisk = (12/9)*(inputHumidity - 83);
+         windRisk = 2*(inputWind - 4);
+         pressureRisk = (-4/11)*(inputPressure - 1013);
+         pain = humidityRisk + windRisk + pressureRisk;
+
+         //Include some visuals (numberline) to show where they are on the pain scale
+
+
+         if (pain > 0) {
+             roundedPain = (int)Math.round(pain);
+             desc = "Expect " + roundedPain + "% higher chance of pain";
+         }
+         else if (pain < 0) {
+             roundedPain = (int)Math.round(pain*-1);
+             desc = "Expect " + roundedPain + "% lower chance of pain";
+         }
+         else
+             desc = "Expect average change of pain";
+
+         return desc;
      }
 
      @Override

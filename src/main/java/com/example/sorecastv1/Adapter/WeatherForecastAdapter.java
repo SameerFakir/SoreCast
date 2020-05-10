@@ -43,17 +43,22 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
         holder.txt_date_time.setText(new StringBuilder(Common.convertUnixToDate(weatherForecastResult
                 .list.get(position).dt)));
 
-        holder.txt_description.setText(new StringBuilder(weatherForecastResult.list.get(position)
-                .weather.get(0).getDescription()));
+        holder.txt_pain_desc.setText(new StringBuilder(calculatePainDesc(
+                weatherForecastResult.list.get(position).main.getHumidity(),
+                weatherForecastResult.list.get(position).main.getPressure(),
+                weatherForecastResult.list.get(position).wind.getSpeed()
+        )).toString());
 
         holder.txt_temperature.setText(new StringBuilder(String.valueOf(weatherForecastResult.list.get(position)
                 .main.getTemp())).append("°C"));
 
-        holder.txt_pain_index.setText(new StringBuilder("Pain Index: ").append(calculatePain(
+        holder.txt_pain_index.setText(new StringBuilder(calculatePain(
                 weatherForecastResult.list.get(position).main.getHumidity(),
                 weatherForecastResult.list.get(position).main.getPressure(),
                 weatherForecastResult.list.get(position).wind.getSpeed()
                 )).toString());
+
+
 
         // txt_pain_index.setText(new StringBuilder("Pain Index: ").append(calculatePain(
         //                                weatherResult.getMain().getHumidity(),
@@ -66,36 +71,55 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
     private String calculatePain(int inputHumidity, double inputPressure, double inputWind) {
         double pain, pressureRisk, humidityRisk, windRisk;
         String level = "Error";
-        //tempWeight = -0.0501*(inputTemp) + 4.4575;
-        //humidityWeight = 0.0155*(inputHumidity) + 2.7262;
-        //windWeight = -0.0045*(inputWind) + 3.874;
-        //pain = 0.8*tempWeight + 0.15*humidityWeight + 0.05*windWeight;
 
         humidityRisk = (12/9)*(inputHumidity - 83);
         windRisk = 2*(inputWind - 4);
         pressureRisk = (-4/11)*(inputPressure - 1013);
         pain = 100 + humidityRisk + windRisk + pressureRisk;
 
-        // if age > 35 then * 0.80, else if age >...
-
+        //Include some visuals (numberline) to show where they are on the pain scale
 
         if (pain < 75){
-            level = "Minimal";
+            level = "Tiny";
         }
-        else if (pain > 75 && pain < 90){
-            level = "Minor";
+        else if (pain >= 75 && pain < 90){
+            level = "Small";
         }
-        else if (pain > 90 && pain < 110){
+        else if (pain >= 90 && pain < 110){
             level = "Average";
         }
-        else if (pain > 110 && pain < 125){
-            level = "Moderate";
+        else if (pain >= 110 && pain < 125){
+            level = "High";
         }
-        else if (pain > 125){
-            level = "Intense";
+        else if (pain >= 125){
+            level = "Strong";
         }
         return level;
+    }
 
+    private String calculatePainDesc(int inputHumidity, double inputPressure, double inputWind) {
+        double pain, pressureRisk, humidityRisk, windRisk;
+        int roundedPain;
+        String desc = "Error";
+
+        humidityRisk = (12/9)*(inputHumidity - 83);
+        windRisk = 2*(inputWind - 4);
+        pressureRisk = (-4/11)*(inputPressure - 1013);
+        pain = humidityRisk + windRisk + pressureRisk;
+
+
+        if (pain > 0) {
+            roundedPain = (int)Math.round(pain);
+            desc = roundedPain + "% higher chance of pain.";
+        }
+        else if (pain < 0) {
+            roundedPain = (int)Math.round(pain*-1);
+            desc = roundedPain + "% lower chance of pain.";
+        }
+        else
+            desc = "Average change of pain.";
+
+        return desc;
     }
 
     @Override
@@ -105,7 +129,7 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txt_date_time, txt_description, txt_temperature, txt_pain_index;
+        TextView txt_date_time, txt_pain_desc, txt_temperature, txt_pain_index;
         ImageView img_weather;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -113,7 +137,7 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
 
             img_weather = (ImageView)itemView.findViewById(R.id.img_weather);
             txt_date_time = (TextView)itemView.findViewById(R.id.txt_date);
-            txt_description = (TextView)itemView.findViewById(R.id.txt_description);
+            txt_pain_desc = (TextView)itemView.findViewById(R.id.txt_pain_desc);
             txt_temperature = (TextView)itemView.findViewById(R.id.txt_temperature);
             txt_pain_index = (TextView)itemView.findViewById(R.id.txt_pain_index);
 

@@ -9,4 +9,34 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="temp_entries">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+
+    <string-array name="temp_values">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+
+    <string-array name="wind_entries">
+        <item>Meters per Second</item>
+        <item>Miles per Hour</item>
+    </string-array>
+
+    <string-array name="wind_values">
+        <item>Meters per Second</item>
+        <item>Miles per Hour</item>
+    </string-array>
+
+    <string-array name="time_entries">
+        <item>24 Hour</item>
+        <item>12 Hour AM/PM</item>
+    </string-array>
+
+    <string-array name="time_values">
+        <item>24 Hour</item>
+        <item>12 Hour AM/PM</item>
+    </string-array>
 </resources>

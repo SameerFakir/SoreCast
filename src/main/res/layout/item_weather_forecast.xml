@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/txt_date"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDarkText"
             android:text="Wednesday"
             android:textSize="20sp"
             android:layout_width="wrap_content"
@@ -28,31 +28,41 @@
         </TextView>
 
         <TextView
+            android:textColor="@color/colorPrimaryDarkText"
+            android:textSize="15sp"
+            android:text="Pain Chance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
             android:id="@+id/txt_pain_index"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:text="Very High"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp">
         </TextView>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img_weather"
                 android:src="@mipmap/ic_launcher"
-                android:layout_width="80dp"
-                android:layout_height="80dp"></ImageView>
+                android:layout_width="40dp"
+                android:layout_height="40dp"></ImageView>
 
             <TextView
                 android:id="@+id/txt_temperature"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginLeft="8dp"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:text="14 C"
                 android:layout_width="wrap_content"
@@ -66,7 +76,7 @@
 
 
         <TextView
-            android:id="@+id/txt_description"
+            android:id="@+id/txt_pain_desc"
             android:textStyle="italic"
             android:textColor="@color/colorPrimary"
             android:text="Slight Breeze"

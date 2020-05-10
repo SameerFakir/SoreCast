@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SoreCast V1</string>
+    <string name="app_name">SoreCast</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Today Weather Demo</string>
@@ -7,14 +7,18 @@
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
+    <string name="format_header">Data Formats</string>
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
+    <string name="temp_title">Temperature Scale</string>
+    <string name="wind_title">Wind Scale</string>
+    <string name="time_title">Time Format</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
+    <string name="sync_title">Sync location periodically</string>
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
@@ -33,4 +37,10 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <!-- Tips Descriptions -->
+    <string name="food_desc">Sticking to a healthier diet can improve bodily functions and assist in coping with soreness.</string>
+    <string name="exercise_desc">Maintaining regular exercise can strengthen muscles and joints, reducing stress on tender areas.</string>
+    <string name="sorecast_desc">SoreCast can help by informing you when you need to prepare for high chances of pain. Use the 5-day forecast to inspect future predictions.</string>
+    <string name="nhs_desc">Utilise NHS recommendations</string>
 </resources>

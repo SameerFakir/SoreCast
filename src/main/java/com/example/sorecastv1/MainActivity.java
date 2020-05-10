@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Looper;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
         }
+        getSupportActionBar().setTitle("Pain Chance");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
@@ -115,22 +117,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_forecast:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TodayWeatherFragment()).commit();
                 break;
             case R.id.nav_meaning:
+                /*
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ForecastFragment()).commit();
+                        new ForecastFragment()).commit(); */
+
+                Intent meaningIntent = new Intent(MainActivity.this, IndexMeaningActivity.class);
+                startActivity(meaningIntent);
                 break;
             case R.id.nav_tips:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CityFragment()).commit();
+                Intent tipsIntent = new Intent(MainActivity.this, TipsActivity.class);
+                startActivity(tipsIntent);
+                break;
+            case R.id.nav_settings:
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+// So that other activities can load, check if this causes other issues
+    @Override
+    protected void onSaveInstanceState(Bundle oldInstanceState) {
+        super.onSaveInstanceState(oldInstanceState);
+        oldInstanceState.clear();
     }
 
     @Override

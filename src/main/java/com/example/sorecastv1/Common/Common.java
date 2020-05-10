@@ -8,12 +8,14 @@ import java.util.Date;
 
 public class Common {
     public static final String API_ID = "27635186d03ce338464d91449ed0b080";
-    public static Location current_location=null; //STOPPED HERE VID @26:02 https://youtu.be/awYSrhUZQL0?t=1559
+    // old api key: 27635186d03ce338464d91449ed0b080
+    //new api key: 0d07107c154301fd0cb02e3b0c41f490
+    public static Location current_location=null;
 
     public static String convertUnixToDate(long dt) {
         Date date = new Date(dt*1000L);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd EEE MM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm EEE dd/MM/yyyy");
         String formatted = sdf.format(date);
 
         return formatted;

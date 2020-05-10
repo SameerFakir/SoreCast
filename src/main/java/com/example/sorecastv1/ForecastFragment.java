@@ -36,7 +36,7 @@ public class ForecastFragment extends Fragment {
     CompositeDisposable compositeDisposable;
     IOpenWeatherMap mService;
 
-    TextView txt_city_name, txt_geo_coord;
+    TextView txt_city_name;
     RecyclerView recycler_forecast;
 
 
@@ -62,12 +62,11 @@ public class ForecastFragment extends Fragment {
         View itemView = inflater.inflate(R.layout.fragment_forecast, container, false);
 
         txt_city_name = (TextView)itemView.findViewById(R.id.txt_city_name);
-        txt_geo_coord = (TextView)itemView.findViewById(R.id.txt_geo_coord);
 
         recycler_forecast = (RecyclerView)itemView.findViewById(R.id.recycler_forecast);
         recycler_forecast.setHasFixedSize(true);
         recycler_forecast.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
+        //recycler_forecast.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         getForecastWeatherInformation();
         
 
@@ -112,7 +111,6 @@ public class ForecastFragment extends Fragment {
 
     private void displayForecastWeather(WeatherForecastResult weatherForecastResult) {
         txt_city_name.setText(new StringBuilder(weatherForecastResult.city.name));
-        txt_geo_coord.setText(new StringBuilder(weatherForecastResult.city.coord.toString()));
 
         WeatherForecastAdapter adapter = new WeatherForecastAdapter(getContext(), weatherForecastResult);
         recycler_forecast.setAdapter(adapter);

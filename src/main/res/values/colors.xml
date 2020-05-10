@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#125688</color>
-    <color name="colorPrimaryDark">#125688</color>
-    <color name="colorAccent">#c8e8ff</color>
+
+    <!-- PURPLE LOOKS: <color name="colorPrimary">#884dff</color> <color name="colorPrimaryDark">#884dff</color>  <color name="backgroundLight">#ffe6ff</color> <color name="colorAccent">#ddccff</color>-->
+    <color name="colorPrimaryBright">#33cc33</color>
+    <color name="colorPrimary">#145214</color>
+    <color name="colorPrimaryDark">#145214</color>
+    <color name="colorPrimaryDarkText">#145214</color>
+    <color name="backgroundLight">#eafaea</color>
+    <color name="strong">#B31A11</color>
+    <color name="high">#FF9800</color>
+    <color name="average">#000000</color>
+    <color name="small">#69C700</color>
+    <color name="tiny">#134210</color>
+
+    <color name="colorAccent">#eafaea</color>
     <color name="textColorPrimary">#ffffff</color>
     <color name="windowBackground">#ffffff</color>
     <color name="navigationBarColor">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTransparentWhite">#CCCCCC</color>
 </resources>
