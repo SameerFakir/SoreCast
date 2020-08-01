@@ -34,7 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
         android:gravity="center_horizontal|center_vertical"
-        android:padding="20dp"
         android:text="TextView"
-        android:textColor="@color/colorTransparentWhite" />
+        android:textColor="@color/colorTransparentWhite"
+        android:textSize="20sp" />
 </RelativeLayout>

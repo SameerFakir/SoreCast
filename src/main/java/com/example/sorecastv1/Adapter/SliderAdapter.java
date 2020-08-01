@@ -42,12 +42,12 @@ public class SliderAdapter extends PagerAdapter {
     };
 
     public String[] slide_description = {
-            "Using local weather data, we are able to estimate the chance of pain",
-            "This estimation is calculated through comparing current weather factors",
-            "Higher humidity increases the chance of pain",
-            "Faster wind speed increases the chance of pain",
-            "Lower air pressure increases the chance of pain",
-            "Chance-of-Pain levels are put into the following categories"
+            "We are able to estimate the chance of pain using the weather.",
+            "This estimation is calculated through comparing current weather factors.",
+            "Higher humidity increases the chance of pain.",
+            "Faster wind speed increases the chance of pain.",
+            "Lower air pressure increases the chance of pain.",
+            "Chances of pain are put into the following five categories."
     };
 
     @Override

@@ -1,12 +1,14 @@
 package com.example.sorecastv1.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,7 +57,8 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
         holder.txt_pain_index.setText(new StringBuilder(calculatePain(
                 weatherForecastResult.list.get(position).main.getHumidity(),
                 weatherForecastResult.list.get(position).main.getPressure(),
-                weatherForecastResult.list.get(position).wind.getSpeed()
+                weatherForecastResult.list.get(position).wind.getSpeed(),
+                holder
                 )).toString());
 
 
@@ -68,7 +71,7 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
 
     }
 
-    private String calculatePain(int inputHumidity, double inputPressure, double inputWind) {
+    private String calculatePain(int inputHumidity, double inputPressure, double inputWind, MyViewHolder holder) {
         double pain, pressureRisk, humidityRisk, windRisk;
         String level = "Error";
 
@@ -81,18 +84,23 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
 
         if (pain < 75){
             level = "Tiny";
+            holder.txt_pain_index.setTextColor(Color.parseColor("#134210"));
         }
         else if (pain >= 75 && pain < 90){
             level = "Small";
+            holder.txt_pain_index.setTextColor(Color.parseColor("#69C700"));
         }
         else if (pain >= 90 && pain < 110){
             level = "Average";
+            holder.txt_pain_index.setTextColor(Color.parseColor("#000000"));
         }
         else if (pain >= 110 && pain < 125){
             level = "High";
+            holder.txt_pain_index.setTextColor(Color.parseColor("#FF9800"));
         }
         else if (pain >= 125){
             level = "Strong";
+            holder.txt_pain_index.setTextColor(Color.parseColor("#B31A11"));
         }
         return level;
     }

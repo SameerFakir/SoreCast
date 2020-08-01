@@ -19,6 +19,14 @@ public class WeatherResult  {
 
     }
 
+    public Wind getWind() {
+        return wind;
+    }
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
+    }
+
     public Coord getCoord() {
         return coord;
     }
@@ -49,14 +57,6 @@ public class WeatherResult  {
 
     public void setMain(Main main) {
         this.main = main;
-    }
-
-    public Wind getWind() {
-        return wind;
-    }
-
-    public void setWind(Wind wind) {
-        this.wind = wind;
     }
 
     public Clouds getClouds() {

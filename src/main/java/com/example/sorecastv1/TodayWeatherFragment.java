@@ -129,10 +129,13 @@ public class TodayWeatherFragment extends Fragment {
                                 weatherResult.getMain().getPressure(),
                                 weatherResult.getWind().getSpeed()
                         )).toString());
-                        //Wind test
-                        txt_wind.setText(new StringBuilder(String.valueOf(weatherResult.getWind().getSpeed())).append(" meters/s").toString());
-                        //Display Panel
 
+                        //Wind
+                        txt_wind.setText(new StringBuilder(String.valueOf(
+                                weatherResult.getWind().getSpeed()
+                        )).append(" meters/s").toString());
+
+                        //Display Panel
                         weather_panel.setVisibility(View.VISIBLE);
                         loading.setVisibility(View.GONE);
 
@@ -153,14 +156,12 @@ public class TodayWeatherFragment extends Fragment {
 
     private String calculatePain(int inputHumidity, double inputPressure, double inputWind) {
         double pain, pressureRisk, humidityRisk, windRisk;
-        String level = "Error";
+        String level = "Error obtaining pain chance";
 
         humidityRisk = (12/9)*(inputHumidity - 83);
         windRisk = 2*(inputWind - 4);
         pressureRisk = (-4/11)*(inputPressure - 1013);
         pain = 100 + humidityRisk + windRisk + pressureRisk;
-
-        //Include some visuals (numberline) to show where they are on the pain scale
 
         if (pain < 75){
             level = "Tiny";
@@ -182,13 +183,14 @@ public class TodayWeatherFragment extends Fragment {
             level = "Strong";
             txt_pain_index.setTextColor(getResources().getColor(R.color.strong));
         }
+
         return level;
     }
 
     private String calculatePainDesc(int inputHumidity, double inputPressure, double inputWind) {
         double pain, pressureRisk, humidityRisk, windRisk;
         int roundedPain;
-        String desc = "Error";
+        String desc = "Error obtaining percentage";
 
         humidityRisk = (12/9)*(inputHumidity - 83);
         windRisk = 2*(inputWind - 4);

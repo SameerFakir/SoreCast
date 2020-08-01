@@ -164,6 +164,7 @@ public class CityFragment extends Fragment {
                      getWeatherInformation(text.toString());
 
                      searchBar.setLastSuggestions(listCity);
+                     searchBar.clearFocus();
                  }
 
                  @Override

@@ -63,10 +63,6 @@
 
             </androidx.viewpager.widget.ViewPager>
 
-            <!-- need to solve issue of ViewPager, maybe could swap frag_Container for viewpager??, investigate)
-             Could try putting frag inside of viewpager
-             Use stackoverfflow Ideas
-             Could just remove viewpager entirely-->
 
         </FrameLayout>
 
